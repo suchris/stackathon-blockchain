@@ -44,6 +44,7 @@ class App extends Component {
     this.state = { account: "", taskCount: 0, tasks: [], loading: true };
     this.createTask = this.createTask.bind(this);
     this.toggleCompleted = this.toggleCompleted.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   createTask(content) {
@@ -88,6 +89,25 @@ class App extends Component {
     console.log("toggleCompleted: tasks", this.state.tasks);
   }
 
+  deleteTask(taskId) {
+    console.log("Delete taskId", taskId);
+    this.setState({ loading: true });
+
+    this.state.todoList.methods
+      .deleteTask(taskId)
+      .send({ from: this.state.account })
+      .once("receipt", (receipt) => {
+        const tasks = [...this.state.tasks.filter((t) => t.id !== taskId)];
+        console.log("delete: tasks", tasks);
+
+        this.setState({
+          loading: false,
+          tasks,
+        });
+      });
+    console.log("deleteTask: tasks", this.state.tasks);
+  }
+
   render() {
     const { loading } = this.state;
 
@@ -123,6 +143,7 @@ class App extends Component {
                   tasks={this.state.tasks}
                   createTask={this.createTask}
                   toggleCompleted={this.toggleCompleted}
+                  deleteTask={this.deleteTask}
                 />
               )}
             </main>

@@ -32,10 +32,12 @@ class TodoList extends Component {
                     defaultChecked={task.completed}
                     onClick={(ev) => this.props.toggleCompleted(task.id)}
                   />
-                  <span className="content">{task.content}</span>
-                  <button onClick={() => console.log("click on delete button")}>
+                  <span className={task.completed ? "content" : ""}>
+                    {task.content}
+                  </span>
+                  {/* <button onClick={(ev) => this.props.deleteTask(task.id)}>
                     Delete
-                  </button>
+                  </button> */}
                 </label>
               </div>
             );
