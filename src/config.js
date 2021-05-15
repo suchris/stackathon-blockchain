@@ -1,10 +1,29 @@
-export const TODO_LIST_ADDRESS = "0x23FABD736f1fb59C6E055896192f190AE7722529";
+export const TODO_LIST_ADDRESS = "0xE1856381d42CB117defddF0a87CF7F6e90CCB66B";
 export const TODO_LIST_ABI = [
   {
     inputs: [],
     payable: false,
     stateMutability: "nonpayable",
     type: "constructor",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "id",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "content",
+        type: "string",
+      },
+    ],
+    name: "EditContent",
+    type: "event",
   },
   {
     anonymous: false,
@@ -48,6 +67,12 @@ export const TODO_LIST_ABI = [
       },
     ],
     name: "TaskCreated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [],
+    name: "TaskDeleted",
     type: "event",
   },
   {
@@ -121,6 +146,41 @@ export const TODO_LIST_ABI = [
       },
     ],
     name: "toggleCompleted",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "string",
+        name: "_content",
+        type: "string",
+      },
+      {
+        internalType: "uint256",
+        name: "_id",
+        type: "uint256",
+      },
+    ],
+    name: "editTask",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_id",
+        type: "uint256",
+      },
+    ],
+    name: "deleteTask",
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",

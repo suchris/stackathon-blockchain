@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class TodoList extends Component {
   render() {
-    const { tasks } = this.props;
+    console.log("TodoList this.props.tasks", this.props.tasks);
 
     return (
       <div id="content">
@@ -23,20 +23,19 @@ class TodoList extends Component {
           <input type="submit" hidden="" />
         </form>
         <ul id="taskList" className="list-unstyled">
-          {tasks.map((task, key) => {
+          {this.props.tasks.map((task, key) => {
             return (
-              <div className="taskTemplate" className="checkbox" key={key}>
+              <div className="checkbox" key={key}>
                 <label>
                   <input
                     type="checkbox"
-                    name={task.id}
                     defaultChecked={task.completed}
-                    ref={(input) => (this.checkbox = input)}
-                    onClick={(ev) =>
-                      this.props.toggleCompleted(this.checkbox.name)
-                    }
+                    onClick={(ev) => this.props.toggleCompleted(task.id)}
                   />
                   <span className="content">{task.content}</span>
+                  <button onClick={() => console.log("click on delete button")}>
+                    Delete
+                  </button>
                 </label>
               </div>
             );
